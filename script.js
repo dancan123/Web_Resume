@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
 
+    // Mobile Menu Handling
     burger.addEventListener('click', () => {
         // Toggle Nav
         nav.classList.toggle('nav-active');
@@ -21,15 +22,36 @@ document.addEventListener('DOMContentLoaded', () => {
         burger.classList.toggle('toggle');
     });
 
-    // Close mobile menu when link is clicked
-    navLinks.forEach(link => {
+    // Close mobile menu ONLY when a regular link (not the dropdown toggle) is clicked
+    const actualLinks = document.querySelectorAll('.nav-links a:not(.dropbtn)');
+    actualLinks.forEach(link => {
         link.addEventListener('click', () => {
             nav.classList.remove('nav-active');
             burger.classList.remove('toggle');
-            navLinks.forEach(link => {
+            navLinks.forEach(link => { // Reset animations
                 link.style.animation = '';
             });
         });
+    });
+
+    // Dropdown Handling for Mobile
+    const dropdownToggle = document.querySelector('.dropbtn');
+    const dropdown = document.querySelector('.dropdown');
+
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', (e) => {
+            // Prevent the menu from closing or jumping
+            e.stopPropagation();
+            // Toggle the active class on the parent li
+            dropdown.classList.toggle('active');
+        });
+    }
+
+    // Close dropdown when clicking outside (optional, good for UX)
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            if (dropdown) dropdown.classList.remove('active');
+        }
     });
 
     // Scroll Animation Observer

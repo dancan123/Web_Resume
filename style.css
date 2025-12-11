@@ -251,12 +251,14 @@ nav {
     /* Slight movement on hover */
 }
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+/* Show the dropdown menu on hover or when active (for mobile/JS) */
+.dropdown:hover .dropdown-content,
+.dropdown.active .dropdown-content {
     display: block;
 }
 
-.dropdown:hover .dropbtn i {
+.dropdown:hover .dropbtn i,
+.dropdown.active .dropbtn i {
     transform: rotate(180deg);
     transition: transform 0.3s ease;
 }
@@ -1168,7 +1170,8 @@ footer {
         border-radius: 8px;
     }
 
-    .dropdown:hover .dropdown-content {
+    .dropdown:hover .dropdown-content,
+    .dropdown.active .dropdown-content {
         transform: none;
     }
 
