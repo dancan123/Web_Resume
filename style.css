@@ -172,6 +172,95 @@ nav {
     width: 100%;
 }
 
+/* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    min-width: 250px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    top: 100%;
+    left: 0;
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+    opacity: 0;
+    /* For animation */
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    animation: dropdownFade 0.3s ease forwards;
+}
+
+/* Invisible bridge to prevent dropdown from closing when moving mouse across the gap */
+.dropdown-content::before {
+    content: "";
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background: transparent;
+}
+
+@keyframes dropdownFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: all 0.2s ease;
+}
+
+/* Remove underline effect from dropdown items if they inherit it */
+.dropdown-content a::after {
+    content: none;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(37, 99, 235, 0.2);
+    color: var(--primary-color);
+    padding-left: 25px;
+    /* Slight movement on hover */
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn i {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
 .burger {
     display: none;
     cursor: pointer;
@@ -1051,6 +1140,40 @@ footer {
 
     .timeline-item::after {
         left: 10px;
+    }
+
+    /* Mobile Dropdown Adjustments */
+    .dropdown-content {
+        position: relative;
+        width: 100%;
+        top: 0;
+        margin-top: 5px;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        transform: none;
+        opacity: 1;
+        animation: none;
+    }
+
+    .dropdown-content a {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 10px;
+        margin: 5px auto;
+        width: 90%;
+        text-align: center;
+        border-radius: 8px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        transform: none;
+    }
+
+    .dropbtn {
+        justify-content: center;
     }
 }
 
